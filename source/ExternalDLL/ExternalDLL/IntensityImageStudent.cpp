@@ -5,15 +5,15 @@ IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
 }
 
 IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) : IntensityImage(other.getWidth(), other.getHeight()) {
-	int size = (other.getWidth() * other.getHeight());
-	pixelStorage = new Intensity[size];
-	for (int i = 0; i < size; ++i) {
-		pixelStorage[i] = other.getPixel(i);
-	}
+	set(other);
+}
+
+IntensityImageStudent::IntensityImageStudent(const RGBImage &other) : IntensityImage(other.getWidth(), other.getHeight()) {
+	set(other);
 }
 
 IntensityImageStudent::IntensityImageStudent(const int width, const int height) : IntensityImage(width, height) {
-	pixelStorage = new Intensity[width*height];
+	set(width, height);
 }
 
 IntensityImageStudent::~IntensityImageStudent() {
@@ -22,8 +22,8 @@ IntensityImageStudent::~IntensityImageStudent() {
 
 void IntensityImageStudent::set(const int width, const int height) {
 	Intensity* newImage = new Intensity[width*height];
-	int oldSize = this->getHeight() * this->getWidth();
-	for (int i = 0; (oldSize ? i < width*height : i < oldSize); i++) {
+	int oldSize = this->getWidth() * this->getHeight();
+	for (int i = 0; (oldSize ? i < (width*height) : i < oldSize); i++) {
 		newImage[i] = (oldSize ? Intensity{} : pixelStorage[i]);
 	}
 	IntensityImage::set(width, height);
@@ -33,10 +33,20 @@ void IntensityImageStudent::set(const int width, const int height) {
 
 void IntensityImageStudent::set(const IntensityImageStudent &other) {
 	IntensityImage::set(other.getWidth(), other.getHeight());
-	pixelStorage = new Intensity[other.getWidth() * other.getHeight()];
 	int maxSize = other.getWidth() * other.getHeight();
+	pixelStorage = new Intensity[maxSize];	
 	for (int i = 0; i < maxSize; i++) {
 		pixelStorage[i] = other.getPixel(i);
+	}
+}
+
+void IntensityImageStudent::set(const RGBImage &other) {
+	IntensityImage::set(other.getWidth(), other.getHeight());
+	int maxSize = other.getWidth() * other.getHeight();
+	pixelStorage = new Intensity[maxSize];
+	for (int i = 0; i < maxSize; i++) {
+		RGB rgb = other.getPixel(i);
+		pixelStorage[i] = (rgb.r + rgb.g + rgb.b) / 3;
 	}
 }
 

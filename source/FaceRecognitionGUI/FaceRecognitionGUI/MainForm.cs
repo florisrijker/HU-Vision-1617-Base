@@ -167,7 +167,7 @@ namespace FaceRecognitionGUI
         private void doPreProcessing(FaceRecognitionTask task) {
             //retrieve from the Config-file if the student algorithms should be used (if not set, use default)
 
-            task.executePreProcessingStep1(("false".Equals(ConfigManager.GetSetting("step1_1UsesDefault")) ? true : false));
+            task.executePreProcessingStep1(("true".Equals(ConfigManager.GetSetting("step1_1UsesDefault")) ? true : false));
             log("PreProcessing step 1: successful!");
 
             task.executePreProcessingStep2(("false".Equals(ConfigManager.GetSetting("step1_2UsesDefault")) ? true : false));
