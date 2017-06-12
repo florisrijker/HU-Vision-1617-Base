@@ -8,6 +8,9 @@
 #include "IntensityImage.h"
 #include "RGBImage.h"
 #include <iostream>
+#include <math.h>
+#include <algorithm>
+
 class IntensityImageStudent : public IntensityImage {
 public:
 	IntensityImageStudent();

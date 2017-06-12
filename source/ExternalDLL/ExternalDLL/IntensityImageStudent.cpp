@@ -46,7 +46,9 @@ void IntensityImageStudent::set(const RGBImage &other) {
 	pixelStorage = new Intensity[maxSize];
 	for (int i = 0; i < maxSize; i++) {
 		RGB rgb = other.getPixel(i);
-		pixelStorage[i] = (rgb.r + rgb.g + rgb.b) / 3;
+		//pixelStorage[i] = (rgb.r + rgb.g + rgb.b) / 3;
+		//pixelStorage[i] = (std::max(rgb.r,std::max(rgb.g, rgb.b)) + std::min(rgb.r,std::min(rgb.g, rgb.b)))/2;
+		pixelStorage[i] = 0.21 * rgb.r + 0.72 * rgb.g + 0.07 * rgb.b;
 	}
 }
 

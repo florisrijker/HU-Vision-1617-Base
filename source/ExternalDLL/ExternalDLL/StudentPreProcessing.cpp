@@ -1,9 +1,20 @@
 #include "StudentPreProcessing.h"
+#include "IntensityImageStudent.h"
+#include "basetimer.h"
+#include <iostream>
+#include <fstream>
 
 
 IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &image) const {
-	//maak hier een nieuw IntencityStudent object aan en return het!
-	return nullptr;
+	BaseTimer timer;
+	timer.start();
+	IntensityImageStudent* Intensity = new IntensityImageStudent(image);
+	timer.stop();
+	std::ofstream myfile;
+	myfile.open("test.txt", std::ofstream::app);
+	myfile << "Luminosity: [" << timer.elapsedSeconds() << ";" << timer.elapsedMilliSeconds() << ";" << timer.elapsedMicroSeconds() << "]\n";
+	myfile.close();
+	return Intensity;
 }
 
 IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &image) const {

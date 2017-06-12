@@ -31,7 +31,6 @@ void RGBImageStudent::set(const RGBImageStudent &other) {
 	pixelStorage = new RGB[maxSize];
 	for (int i = 0; i < maxSize; i++) {
 		pixelStorage[i] = other.getPixel(i);
-		// voeg hier de conversie stappen toe!
 	}
 }
 
