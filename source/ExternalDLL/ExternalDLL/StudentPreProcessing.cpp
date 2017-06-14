@@ -12,7 +12,7 @@ IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &imag
 	timer.stop();
 	std::ofstream myfile;
 	myfile.open("test.txt", std::ofstream::app);
-	myfile << "Luminosity: [" << timer.elapsedSeconds() << ";" << timer.elapsedMilliSeconds() << ";" << timer.elapsedMicroSeconds() << "]\n";
+	myfile << "Student: [" << timer.elapsedSeconds() << ";" << timer.elapsedMilliSeconds() << ";" << timer.elapsedMicroSeconds() << "]\n";
 	myfile.close();
 	return Intensity;
 }

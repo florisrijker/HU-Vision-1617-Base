@@ -9,11 +9,19 @@
 #include "GrayscaleAlgorithm.h"
 #include "ImageFactory.h"
 #include "HereBeDragons.h"
+#include "basetimer.h"
 
 IntensityImage * DefaultPreProcessing::stepToIntensityImage(const RGBImage &src) const {
 	GrayscaleAlgorithm grayScaleAlgorithm;
 	IntensityImage * image = ImageFactory::newIntensityImage();
+	BaseTimer timer;
+	timer.start();
 	grayScaleAlgorithm.doAlgorithm(src, *image);
+	timer.stop();
+	std::ofstream myfile;
+	myfile.open("test.txt", std::ofstream::app);
+	myfile << "Default: [" << timer.elapsedSeconds() << ";" << timer.elapsedMilliSeconds() << ";" << timer.elapsedMicroSeconds() << "]\n";
+	myfile.close();
 	return image;
 }
 
